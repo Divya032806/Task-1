@@ -1,0 +1,50 @@
+TAsk 1
+
+1. Databse Creation
+
+Create database ecommerce;
+use ecommerce;
+
+2. Tables
+
+Create Tables Customers( 
+customer_id int Primary Key,
+name varchar(100) not null,
+email varchar(255) not null,
+created_at TIMESTAMP Default CURRENT_TIMESTAMP
+);
+
+Create Tables Products( 
+Product_id int Primary Key,
+name varchar(100) not null,
+price decimal(10,2) not null,
+stock int not null
+);
+
+Create Tables Orders( 
+Order_id int Primary Key,
+customer_id int not null,
+order_date TIMESTAMP Default CURRENT_TIMESTAMP,
+total_price decimal(10,2) not null,
+FOREIGN Key (customer_id) REFERENCES Customers(customer_id) 
+);
+
+
+Create Table Ordered_Items(
+order_item_id int Primary Key
+Product_id int not null
+Order_id int not null,
+quantity int not null,
+price decimal(10,2) not null,
+FOREIGN Key (Product_id) REFERENCES Products(Product_id) 
+FOREIGN Key (Order_id) REFERENCES Orders(Order_id) 
+);
+
+
+ER Diagram 
+
+Customers -> (1- to many) -> Orders
+Orders -> (1- to many) -> Ordered_Items <- (1- to many) <- Products
+
+
+
